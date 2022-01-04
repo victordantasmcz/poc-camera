@@ -17,6 +17,15 @@ const useCapture = (container, constraints = defaultConstraints) => {
   const appendVideoToContainer = () =>
     globals.containerElement.appendChild(globals.videoElement);
 
+  const mirrorVideoElement = () => {
+    const { stream, videoElement } = globals;
+    const settings = stream ? stream.getTracks()[0].getSettings() : {};
+    console.log('settings => ', settings);
+    console.log('facingMode => ', settings.facingMode);
+    const canMirror = settings.facingMode === 'user' || !settings.facingMode;
+    videoElement.style = canMirror ? 'transform: scaleX(-1);' : 'transform: scaleX(1);';
+  };
+
   const setStreamInVideo = () => {
     if (globals.videoElement && "srcObject" in globals.videoElement) {
       globals.videoElement.srcObject = globals.stream;
@@ -65,6 +74,7 @@ const useCapture = (container, constraints = defaultConstraints) => {
     await startCamera();
     setContainerElement();
     setVideoElement();
+    mirrorVideoElement();
     setStreamInVideo();
     appendVideoToContainer();
     globals.videoElement.play();
