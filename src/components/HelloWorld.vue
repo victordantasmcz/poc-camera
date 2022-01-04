@@ -34,10 +34,9 @@ const handleSwitch = async () => {
 </script>
 
 <template>
-  <div id="container">
-
-  </div>
   <button @click="handleStart" :disabled="capture">Start Capture</button>
   <button @click="handleStop" :disabled="!capture">Stop Capture</button>
   <button @click="handleSwitch" :disabled="!capture">Switch</button>
+  <button style="position: absolute; right: 8px;" @click="$emit('feedback')">Feedback</button>
+  <div id="container"></div>
 </template>
