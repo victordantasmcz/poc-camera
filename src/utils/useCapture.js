@@ -84,13 +84,6 @@ const useCapture = (container, constraints = defaultConstraints) => {
     await captureInit();
   };
 
-  const getCameraPermission = async () => {
-    if (navigator.permissions) {
-      const response = await navigator.permissions.query({ name: 'camera' });
-      if (response.state === 'denied') throw new Error('PermissionDenied');
-    }
-  }
-
   return { captureInit, stopCapture, switchCamera };
 };
 
