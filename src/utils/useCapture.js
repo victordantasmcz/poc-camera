@@ -23,7 +23,7 @@ const useCapture = (container, constraints = defaultConstraints) => {
     console.log('settings => ', settings);
     console.log('facingMode => ', settings.facingMode);
     const canMirror = settings.facingMode === 'user' || !settings.facingMode;
-    videoElement.style = canMirror ? 'transform: scaleX(-1);' : 'transform: scaleX(1);';
+    videoElement.style.transform = canMirror ? 'scaleX(-1)' : 'scaleX(1)';
   };
 
   const setStreamInVideo = () => {
@@ -62,6 +62,7 @@ const useCapture = (container, constraints = defaultConstraints) => {
     const video = document.createElement("video");
     video.setAttribute("autoplay", "true");
     video.setAttribute("playsinline", "true");
+    video.style.width = '100%';
     return video;
   };
 
