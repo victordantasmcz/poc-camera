@@ -82,10 +82,10 @@ const useCapture = (container, constraints = defaultConstraints) => {
   };
 
   const stopCapture = () => {
-    if (globals.stream)
-      globals.stream.getTracks().forEach((track) => track.stop());
-    if (globals.containerElement && globals.videoElement)
-      globals.containerElement.removeChild(globals.videoElement);
+    const { stream, videoElement, containerElement } = globals;
+    if (stream) stream.getTracks().forEach((track) => track.stop());
+    if (containerElement && videoElement && containerElement.contains(videoElement))
+      containerElement.removeChild(videoElement);
   };
 
   const switchCamera = async () => {
